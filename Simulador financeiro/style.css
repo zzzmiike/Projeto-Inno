@@ -77,8 +77,9 @@ hr{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 400px;
+    height: 50%;
     width: 30%;
+
 }
 
 .h3_title{
@@ -92,15 +93,26 @@ hr{
 }
 
 .footer{
-    padding: 40px 20%;
+    margin-top: 5%;
+    padding: 3% 20%;
     background-color: #232323;
-    height: 200px;
+    height: auto;
 }
 
 .logo-footer{
-    margin-bottom: 40px;
+    margin-bottom: 3%;
 }
 
 .text-footer{
     color: #ffffff;
+}
+
+.div-texto {
+    font-size: 100%;
+    width: 75%;
+}
+
+.simulacao-css{
+    height: auto;
+    width: 100%;
 }
