@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Simulador Financeiro - InnoTech</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="src/images/INNO Tech - Logo.svg" type="image/x-icon">
 </head>
+
 <body>
     <header>
         <nav class="navegation">
@@ -28,12 +30,12 @@
                 <div id="cadastro">
 
                     <h3 class="h3_title">Cadastro do usuario</h3> <br>
-            
+
                     <!-- Aba de cadastro simples do usuario-->
-                    Seu nome:<input type="text" id="nomeUsuario" placeholder="Nome Sobrenome"><br><br>
+                    Seu nome: <input type="text" id="nomeUsuario" placeholder="Nome Sobrenome"><br><br>
                     Seu Email: <input type="email" id="emailUsuario" placeholder="email@email.com"><br><br>
                     Telefone contato: <input id="telefoneUsuario" placeholder="99 91234-4321"><br><br>
-            
+
                     <button onclick="Dados()">Envie seus dados!</button>
                     <br><br>
                     <p id="p_Text"></p>
@@ -43,12 +45,14 @@
                 <br><br>
                 <div id="simulacao" class="simulacao-css">
                     <!-- Simulador-->
-            
+
                     <h3 class="h3_title">Simule ja!</h3> <br>
-            
+
                     Nome da Empresa: <input id="nomeEmpresa"><br><br>
-                    Estimativa de perda mensal (em reais):<input id="perdaEmpresa"><br><br>
-                    Estimativa de ganho mensal (em reais):<input id="ganhoEmpresa"><br><br>
+                    Qual o produto mais barato da sua loja?(em reais): <input id="produtoBarato"><br><br>
+                    Qual o produto mais caro da sua loja?(em reais): <input id="produtoCaro"><br><br>
+                    Quantos produtos são fabricados mensalmente?: <input id="qtdProdutos"><br><br>
+                    Quantos produtos são perdidos mensalmente?: <input id="qtdPerda"><br><br>
                     Qual o problema atual?
                     <select id="Escolha"><br><br>
                         <option>Escolha o problema enfrentado</option><br>
@@ -57,12 +61,12 @@
                         <option>Ambos</option>
                         <option>Não sei</option>
                     </select><br><br>
-            
+
                     <button onclick="Simule()">Simula INNO!</button><br><br><br>
-            
+
                     <div id="div_text" class="div-texto"></div>
                 </div>
-            
+
             </div><br><br><br>
             <div class="caixa-image">
                 <img src="src/images/Figure - Main.png" class="img-vector">
@@ -75,6 +79,7 @@
         <p class="text-footer">Inno © 2023. Todos os direitos reservados.</p>
     </footer>
 </body>
+
 </html>
 
 <script>
@@ -91,47 +96,104 @@
 
     }
 
-    function Simule(){
-        
+    function Simule() {
+
         var Nome = nomeUsuario.value;
         var Empresa = nomeEmpresa.value;
-        var Perda = Number(perdaEmpresa.value);
-        var Ganho = Number(ganhoEmpresa.value);
+        var Valor1 = Number(produtoBarato.value);
+        var Valor2 = Number(produtoCaro.value);
+        var produtosFabricados = Number(qtdProdutos.value);
+        var PerdaProdutos = Number(qtdPerda.value);
         var Problema = Escolha.value;
 
-        var lucroLiquidoAtual = Ganho - Perda;
+        var mediaProduto = (Valor1 + Valor2) / 2
+        var totalProdutos = mediaProduto * produtosFabricados
+        var produtosPerdidos = mediaProduto * PerdaProdutos
+
+        var produtosEmReais = mediaProduto * produtosFabricados;
+        var produtosPerEmReais = mediaProduto * PerdaProdutos;
+
+        var lucroLiquidoAtual = totalProdutos - produtosPerdidos;
         var lucroTemp = lucroLiquidoAtual * 1.15;
         var lucroUmidade = lucroLiquidoAtual * 1.20;
-        var lucroAmbos = lucroLiquidoAtual * 1.35;
+        var lucroAmbos = lucroLiquidoAtual * 1.25;
+        var lucroNaoSei = lucroLiquidoAtual * 1.05;
 
-        if(Problema == "Temperatura"){
+        if (Valor1 > 0) {
+            if (Problema == "Temperatura") {
 
-            div_text.innerHTML = `Baseado nos dados informados anteriormente a(o) ${Empresa} tem que seus lucros atuais sao de: ${lucroLiquidoAtual}<br>
-            Com os servicos da Innotech, teriamos uma diminuição no prejuizo mensal de <b style="color: #5093F9";> 15%.</b> <br>
-            Totalizando assim um Lucro final de: <b style="color: #5093F9";> ${lucroTemp}</b>
-            `
+                div_text.innerHTML = `
+                Baseado nos dados informados: <br>
+                Valor do produto mais barato: <b style="color: #5093F9";> R$${Valor1} </b> <br>
+                Valor do produto mais caro: <b style="color: #5093F9";> R$${Valor2} </b> <br>
+                Média de valor dos produtos: <b style="color: #5093F9";> R$${mediaProduto} </b> <br>
+                Valor em reais de produtos mensalmente fabricados: <b style="color: #5093F9";> R$${produtosEmReais} </b> <br>
+                Valor em reais de perdas mensais em produtos: <b style="color: #5093F9";> R$${produtosPerEmReais} </b> <br> <br>
 
-        }if(Problema == "Umidade"){
+                A empresa ${Empresa} tem que seus lucros atuais são de:<b style="color :#5093F9"> R$${lucroLiquidoAtual}</b><br>
+                Com os servicos da Innotech, teriamos uma diminuição no prejuízo mensal de <b style="color: #5093F9";> 15%</b>. <br>
+                Totalizando assim um lucro final de: <b style="color: #5093F9";> R$${lucroTemp}</b>
+`
+            } if (Problema == "Umidade") {
 
-            div_text.innerHTML = `Baseado nos dados informados anteriormente a(o) ${Empresa} tem que seus lucros atuais sao de: ${lucroLiquidoAtual}<br>
-            Com os servicos da Innotech, teriamos uma diminuição no prejuizo mensal de <b style="color: #5093F9";> 20%.</b> <br>
-            Totalizando assim um Lucro final de: <b style="color: #5093F9";> ${lucroUmidade}</b>
-            `
-        }if(Problema == "Ambos"){
+                div_text.innerHTML = `
+                Baseado nos dados informados: <br>
+                Valor do produto mais barato: <b style="color: #5093F9";> R$${Valor1} </b> <br>
+                Valor do produto mais caro: <b style="color: #5093F9";> R$${Valor2} </b> <br>
+                Média de valor dos produtos: <b style="color: #5093F9";> R$${mediaProduto} </b> <br>
+                Valor em reais de produtos mensalmente fabricados: <b style="color: #5093F9";> R$${produtosEmReais} </b> <br>
+                Valor em reais de perdas mensais em produtos: <b style="color: #5093F9";> R$${produtosPerEmReais} </b> <br> <br>
 
-            div_text.innerHTML = `Baseado nos dados informados anteriormente a(o) ${Empresa} tem que seus lucros atuais sao de: ${lucroLiquidoAtual}<br>
-            Com os servicos da Innotech, teriamos uma diminuição no prejuizo mensal de <b style="color: #5093F9";> 35%.</b> <br>
-            Totalizando assim um Lucro final de: <b style="color: #5093F9";> ${lucroAmbos}</b>
-            `
+                A empresa ${Empresa} tem que seus lucros atuais são de: <b style="color :#5093F9"> R$${lucroLiquidoAtual}</b><br>
+                Com os servicos da Innotech, teriamos uma diminuição no prejuízo mensal de <b style="color: #5093F9";> 20%</b>. <br>
+                Totalizando assim um lucro final de: <b style="color: #5093F9";> R$${lucroUmidade}</b>
+`
+            } if (Problema == "Ambos") {
 
+                div_text.innerHTML = `
+                Baseado nos dados informados: <br>
+                Valor do produto mais barato: <b style="color: #5093F9";> R$${Valor1} </b> <br>
+                Valor do produto mais caro: <b style="color: #5093F9";> R$${Valor2} </b> <br>
+                Média de valor dos produtos: <b style="color: #5093F9";> R$${mediaProduto} </b> <br>
+                Valor em reais de produtos mensalmente fabricados: <b style="color: #5093F9";> R$${produtosEmReais} </b> <br>
+                Valor em reais de perdas mensais em produtos: <b style="color: #5093F9";> R$${produtosPerEmReais} </b> <br> <br>
+                A empresa ${Empresa} tem que seus lucros atuais são de:<b style="color :#5093F9"> R$ ${lucroLiquidoAtual}</b><br>
+                Com os servicos da Innotech, teriamos uma diminuição no prejuízo mensal de <b style="color: #5093F9";> 25%</b>. <br>
+                Totalizando assim um lucro final de: <b style="color: #5093F9";> R$${lucroAmbos}</b>
+                `
+
+            }
+            if (Problema == "Escolha o problema enfrentado") {
+                div_text.innerHTML = `<b style="color: red"> Escolha uma alternativa valida </b>`
+            }
+            if (Problema == "Não sei") {
+                div_text.innerHTML = `
+                Baseado nos dados informados: <br>
+                Valor do produto mais barato: <b style="color: #5093F9";> R$${Valor1} </b> <br>
+                Valor do produto mais caro: <b style="color: #5093F9";> R$${Valor2} </b> <br>
+                Média de valor dos produtos: <b style="color: #5093F9";> R$${mediaProduto} </b> <br>
+                Valor em reais de produtos mensalmente fabricados: <b style="color: #5093F9";> R$${produtosEmReais} </b> <br>
+                Valor em reais de perdas mensais em produtos: <b style="color: #5093F9";> R$${produtosPerEmReais} </b> <br> <br>
+
+                A empresa ${Empresa} tem que seus lucros atuais são de:<b style="color :#5093F9"> R$ ${lucroLiquidoAtual}</b><br>
+                Com os servicos da Innotech, e sem uma grande precisão estimamos que teriamos uma diminuição no prejuízo mensal de <b style="color: #5093F9";> 5%</b>. <br>
+                Totalizando assim um lucro final de: <b style="color: #5093F9";> R$${lucroNaoSei}</b>`
+            }
         }
-        if (Problema == "Escolha o problema enfrentado") {
-            div_text.innerHTML = `<b style="color: red"> Escolha uma alternativa valida </b>`
+        if(Valor1 <= 0){
+            div_text.innerHTML = `<b style="color: red"> Confira novamente o campo de mais barato da loja</b>` 
         }
-        if (Problema == "Não sei") {
-            div_text.innerHTML = ``
+        if(Valor2 <= 0){
+            div_text.innerHTML = `<b style="color: red"> Confira novamente o campo de produto mais caro da loja</b>`
         }
+        if(produtosFabricados <= 0){
+            div_text.innerHTML = `<b style="color: red"> Confira novamente o campo de fabricados mensalmente.</b>`
+        }
+        if(PerdaProdutos <= 0){
+            div_text.innerHTML = `<b style="color: red"> Confira novamente o campo de perdidos mensalmente.</b>` 
+        } 
     }
+
 
 
 </script>
