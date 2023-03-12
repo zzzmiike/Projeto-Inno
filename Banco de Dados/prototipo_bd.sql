@@ -89,6 +89,11 @@ umidade FLOAT not null
 INSERT INTO metrica VALUES
 ('1', 'LM35', '22.3', '80.0');
 
+ALTER TABLE metrica ADD COLUMN dtInfo DATE;
+
+UPDATE metrica SET dtInfo = '2023-03-10'
+	WHERE idMetrica = '1';
+
 -- Exibindo os todos os valores da tabela metrica;
 SELECT * FROM metrica;
 
