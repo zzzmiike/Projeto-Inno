@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Financeiro</title>
+</head>
+
+<body>
+    <div id="cadastro">
+
+        <h3 class="h3_title">Cadastro do usuario</h3>
+
+        <!-- Aba de cadastro simples do usuario-->
+        Seu nome: <input type="text" id="nomeUsuario"><br><br>
+        Seu Email: <input type="email" id="emailUsuario" placeholder="email@email.com"><br><br>
+        Telefone contato: <input id="telefoneUsuario"><br><br>
+
+        <button onclick="Dados()">Envie seus dados!</button>
+
+        <p id="p_Text"></p>
+    </div>
+
+    <div id="simulacao">
+        <!-- Simulador-->
+
+        <h3 class="h3_title">Simule ja!!!</h3>
+
+        Nome da Empresa: <input id="nomeEmpresa"><br><br>
+        Estimativa de perda mensal (em reais):<input id="perdaEmpresa"><br><br>
+        Estimativa de ganho mensal (em reais):<input id="ganhoEmpresa"><br><br>
+        Qual o problema atual?
+        <select id="Escolha"><br><br>
+            <option>Escolha o problema enfrentado</option><br>
+            <option>Temperatura</option>
+            <option>Umidade</option>
+            <option>Ambos</option>
+        </select><br><br>
+
+        <button onclick="Simule()">Simula INNO!!</button><br><br><br>
+
+        <div id="div_text"></div>
+    </div>
+
+</body>
+
+</html>
+<script>
+    function Dados() {
+
+        // Var dos inputs
+
+        var Nome = nomeUsuario.value;
+        var Email = emailUsuario.value;
+        var Telefone = telefoneUsuario.value;
+
+        p_Text.innerHTML = `<p style="color:blue;"> Caro senhor <b> ${Nome}</b> o seu email, e seu telefone ja foram enviados
+            para nossa equipe InnoTech, confira sua caixa de email!!</p>`
+
+    }
+
+    function Simule(){
+        
+        var Nome = nomeUsuario.value;
+        var Empresa = nomeEmpresa.value;
+        var Perda = Number(perdaEmpresa.value);
+        var Ganho = Number(ganhoEmpresa.value);
+        var Problema = Escolha.value;
+
+        var lucroLiquidoAtual = Ganho - Perda;
+        var lucroTemp = lucroLiquidoAtual * 1.15;
+        var lucroUmidade = lucroLiquidoAtual * 1.20;
+        var lucroAmbos = lucroLiquidoAtual * 1.35;
+
+        if(Problema == "Temperatura"){
+
+            div_text.innerHTML = `Baseado nos dados informados anteriormente a(o) ${Empresa} tem que seus lucros atuais sao de: ${lucroLiquidoAtual}<br>
+            Com os servicos da Innotech, teriamos uma diminuicao no prejuizo mensal de <b style="color: yellowgreen";> 15%.</b> <br>
+            Totalizando assim um Lucro final de: <b style="color: yellowgreen";> ${lucroTemp}</b>
+            `
+
+        }if(Problema == "Umidade"){
+
+            div_text.innerHTML = `Baseado nos dados informados anteriormente a(o) ${Empresa} tem que seus lucros atuais sao de: ${lucroLiquidoAtual}<br>
+            Com os servicos da Innotech, teriamos uma diminuicao no prejuizo mensal de <b style="color: yellowgreen";> 20%.</b> <br>
+            Totalizando assim um Lucro final de: <b style="color: yellowgreen";> ${lucroUmidade}</b>
+            `
+        }if(Problema == "Ambos"){
+
+            div_text.innerHTML = `Baseado nos dados informados anteriormente a(o) ${Empresa} tem que seus lucros atuais sao de: ${lucroLiquidoAtual}<br>
+            Com os servicos da Innotech, teriamos uma diminuicao no prejuizo mensal de <b style="color: yellowgreen";> 35%.</b> <br>
+            Totalizando assim um Lucro final de: <b style="color: yellowgreen";> ${lucroAmbos}</b>
+            `
+
+        }
+    }
+
+
+</script>
+
+<!--
+
+-->

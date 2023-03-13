@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financeiro</title>
+    <style>
+    </style>
+</head>
+<body bgcolor="#3cecc4">
+    <H1>INFORME SEUS DADOS E SIMULE SEUS LUCROS FUTUROS!</H1>
+    <BR> <img src="https://media1.giphy.com/media/3oKIPEqDGUULpEU0aQ/giphy.gif?cid=ecf05e47coew1a0xo7956xrj4wz01kjswk3pcqy4v59z0job&rid=giphy.gif&ct=g">
+
+
+
+    <h1 class="">Simule seu orçamento </h1>
+    <h2> Digite seu Nome::<h1></h2> <input type="text" name="" id="input_nome">
+
+    <h2> Digite seu Telefone:<h1></h2> <input type="text" name="" id="input_telefone">
+
+    <h2>E-mail:<h1></h2> <input type="text" name="" id="input_email"><br><br>
+    <Button onclick="Mensagem()">Envio de Informações </Button><br><br>
+    <div id="div_mensagem"></div>
+    <br><br>
+    <br>
+    <hr>
+    <h1>Simule seus lucros futuros </h1>
+
+
+
+    
+
+        <h2>Valor estoque total :<h1></h2> <input type="text" name="" id="input_estoque">
+
+            <h2>Valor Prejuizo do ultimo mes:<h1></h2> <input type="text" name="" id="input_prejuizo">
+
+        <h3><button onclick="Calculo()">Calcule seus ganhos</button></h3>
+
+    <div id="div_Calculo"></div>
+
+</div>
+
+
+</body>
+</html>
+
+<script>
+
+function Mensagem(){
+var nome = input_nome.value
+var telefone = Number(input_telefone.value)
+var email = input_email.value
+
+div_mensagem.innerHTML=`Obrigado ${nome} suas informações ja foram enviadas, logo entraremos em contato via WhatsApp no numero ${telefone}.`
+}
+
+function Calculo(){
+var receita = Number (input_estoque.value)
+var custo = Number (input_prejuizo.value)
+var calculo = (receita - custo)
+var final = (calculo/receita) *100
+var preju = (custo/receita)*100
+ alert(`seu lucro foi de apenas ${final}% . Podemos ajudar com nossas soluções  para que seu estoque de ${receita} reais seja lucrativo integralmente, evitando assim essa perda de ${preju}% e dando para sua empresa um gás a mais em seus lucros!! `
+)}
+
+</script>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora financeira</title>
+</head>
+
+<body>
+    Quantos produtos você vende ao ano?
+    <input id="qtdProdutos"><br>
+    Quantos são devolvidos ao ano por estarem embolorados?
+    <input id="qtdDevoluções"><br>
+    <button onclick="calcular()">Calcular nossa solução</button>
+    <div id="div_display"></div>
+</body>
+
+</html>
+
+<script>
+    function calcular() {
+        var devolucoes = Number(qtdDevoluções.value / qtdProdutos.value) * 100
+        var diminuicao = Number (devolucoes - (devolucoes*0.8)) 
+        div_display.innerHTML = ` <b style="color: red"> Sua empresa perde ${devolucoes}% de produtos <br>`
+        div_display.innerHTML += `<b style="color: blue"> com nossa solução aplicada sua perda será apenas ${diminuicao}% de produtos`
+    }
+</script>
